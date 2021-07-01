@@ -12,8 +12,6 @@ setuptools.setup(
         "Operating System :: OS Independent",
     ),
     install_requires=[
-        "z-quantum-core",
-        "z-quantum-qubo",
         "dimod",
         "dwave-neal",
         "pandas",
