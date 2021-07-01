@@ -19,5 +19,7 @@ setuptools.setup(
         "z-quantum-qubo",
         "dimod",
         "dwave-neal",
+        "pandas",
+        "numpy"
     ],
 )
