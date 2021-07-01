@@ -1,9 +1,12 @@
-import json
+from typing import List
+
+import pandas as pd
+
+from src.data import get_dataset, preprocess_data
 from src.utils import save_dict, load_dict
-from src.data import get_dataset
 
 
-def load_dataset(url: str, names=List[str]) -> None:
+def load_dataset(url: str, names: List[str]) -> None:
     save_dict(
         to_save=get_dataset(url=url, names=names).to_dict(),
         output_file='dataset.json'

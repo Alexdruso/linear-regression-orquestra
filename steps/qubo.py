@@ -1,7 +1,8 @@
-from src.linear_regression import build_precision_matrix, build_precision_two_complement_fixed_point, build_Q
-from src.utils import load_dict, save_dict
 import dimod
 import numpy as np
+
+from src.linear_regression import build_precision_matrix, build_precision_two_complement_fixed_point, build_Q
+from src.utils import load_dict, save_dict
 
 
 def get_precision(num_bits: int, num_weights: int, point_position: float) -> None:
