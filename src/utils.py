@@ -1,4 +1,7 @@
 import json
+from io import TextIOBase
+from os import PathLike
+from typing import Union, IO
 
 
 def save_dict(to_save: dict, output_file: Union[TextIOBase, IO[str], str, PathLike]) -> None:
@@ -9,7 +12,7 @@ def save_dict(to_save: dict, output_file: Union[TextIOBase, IO[str], str, PathLi
             json.dump(to_save, output_file)
 
 
-def load_dict(input_file: Union[TextIOBase, IO[str], str, PathLike]):
+def load_dict(input_file: Union[TextIOBase, IO[str], str, PathLike]) -> dict:
     try:
         to_load = json.load(input_file)
     except AttributeError:
