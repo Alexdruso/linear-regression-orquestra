@@ -1,0 +1,68 @@
+# Workflow API version
+apiVersion: io.orquestra.workflow/1.0.0
+
+# Prefix for workflow ID
+name: sa-linear-regression
+
+imports:
+- name: z-quantum-core
+  type: git
+  parameters:
+    repository: "git@github.com:zapatacomputing/z-quantum-core.git"
+    branch: "master"
+- name: z-quantum-qubo
+  type: git
+  parameters:
+    repository: "git@github.com:zapatacomputing/z-quantum-qubo.git"
+    branch: "master"
+- name: linear-regression-orquestra
+  type: git
+  parameters:
+    repository: "git@github.com:Alexdruso/linear-regression-orquestra.git"
+    branch: "main"
+
+
+steps:
+- name: load-dataset
+  config:
+    runtime:
+      language: python3
+      imports: [linear-regression-orquestra]
+      parameters:
+        file: linear-regression-orquestra/steps/dataset_preprocessing.py
+        function: load_dataset
+  inputs:
+  - url: 'https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data'
+    type: str
+  - names: ['sepal-length', 'sepal-width', 'petal-length', 'petal-width', 'class']
+    type: List[str]
+
+  outputs:
+  - name: dataset
+    type: dataset
+
+- name: preprocess-dataset
+  passed: [load-dataset]
+  config:
+    runtime:
+      language: python3
+      imports: [linear-regression-orquestra]
+      parameters:
+        file: linear-regression-orquestra/steps/dataset_preprocessing.py
+        function: preprocess_dataset
+  inputs:
+  - dataset: ((load-dataset.dataset))
+    type: dataset
+  - features: ['petal-length']
+    type: List[str]
+  - target: 'petal-width'
+    type: str
+
+  outputs:
+  - name: preprocessed_dataset
+    type: dataset
+
+types:
+- dataset
+- str
+- List[str]
