@@ -13,8 +13,8 @@ def load_dataset(url: str, names: List[str]) -> None:
     )
 
 
-def preprocess_dataset(features: List[str], target: str) -> None:
-    dataset = load_dict('dataset.json')
+def preprocess_dataset(dataset, features: List[str], target: str) -> None:
+    dataset = load_dict(dataset)
 
     df = pd.DataFrame.from_dict(dataset)
 
