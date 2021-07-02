@@ -62,7 +62,29 @@ steps:
   - name: preprocessed_dataset
     type: dataset
 
+- name: get-precision
+  config:
+    runtime:
+      language: python3
+      imports: [linear-regression-orquestra]
+      parameters:
+        file: linear-regression-orquestra/steps/qubo.py
+        function: get_precision
+  inputs:
+  - num_bits: 32
+    type: int
+  - num_weights: 2
+    type: int
+  - point_position: 0.5
+    type: float
+
+  outputs:
+  - name: precision_matrix
+    type: matrix
+
+
 types:
 - dataset
 - str
 - List[str]
+- matrix
