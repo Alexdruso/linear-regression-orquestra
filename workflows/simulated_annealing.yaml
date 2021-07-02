@@ -82,6 +82,24 @@ steps:
   - name: precision_matrix
     type: matrix
 
+- name: get-problem-q
+  passed: [get-precision, preprocess-dataset]
+  config:
+    runtime:
+      language: python3
+      imports: [linear-regression-orquestra]
+      parameters:
+        file: linear-regression-orquestra/steps/qubo.py
+        function: get_problem_matrix
+  inputs:
+  - precision_matrix: ((get-precision.precision_matrix))
+    type: matrix
+  - preprocessed_dataset: ((preprocess-dataset.preprocessed_dataset))
+    type: dataset
+
+  outputs:
+  - name: q
+    type: matrix
 
 types:
 - dataset
