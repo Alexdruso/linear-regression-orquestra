@@ -7,9 +7,7 @@ from src.utils import save_dict, load_dict
 
 
 def load_dataset(url: str, names: List[str]) -> None:
-    print('function called')
-    print('The url is {}'.format(url))
-    print('The names are {}'.format(names))
+
     save_dict(
         to_save=get_dataset(url=url, names=names).to_dict(),
         output_file='dataset.json'
