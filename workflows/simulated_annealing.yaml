@@ -101,8 +101,28 @@ steps:
   - name: q
     type: matrix
 
+- name: solve-qubo
+  passed: [get-problem-q]
+  config:
+    runtime:
+      language: python3
+      imports: [linear-regression-orquestra]
+      parameters:
+        file: linear-regression-orquestra/steps/qubo.py
+        function: anneal
+  inputs:
+  - q: ((get-problem-q.q))
+    type: matrix
+  - precision_matrix: ((get-precision.precision_matrix))
+    type: matrix
+
+  outputs:
+  - name: solution
+    type: solution
+
 types:
 - dataset
 - str
 - List[str]
 - matrix
+- solution
