@@ -57,7 +57,7 @@ def anneal(q, precision_matrix) -> None:
 
     save_dict(
         {
-            'solution': w_approx
+            'solution': w_approx.tolist()
         },
         'solution.json'
     )
