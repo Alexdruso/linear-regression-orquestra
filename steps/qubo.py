@@ -20,9 +20,9 @@ def get_precision(num_bits: int, num_weights: int, point_position: float) -> Non
     )
 
 
-def get_problem_matrix() -> None:
-    precision = load_dict('precision_matrix.json')['precision']
-    dataset = load_dict('preprocessed_dataset.json')
+def get_problem_matrix(precision_matrix, preprocessed_dataset) -> None:
+    precision = load_dict(precision_matrix)['precision']
+    dataset = load_dict(preprocessed_dataset)
     precision = np.asarray(precision)
     x = np.asarray(dataset['x'])
     y = np.asarray(dataset['y'])
@@ -39,12 +39,12 @@ def get_problem_matrix() -> None:
     )
 
 
-def anneal() -> None:
+def anneal(q, precision_matrix) -> None:
     q = np.asarray(
-        load_dict('q.json')['q']
+        load_dict(q)['q']
     )
 
-    precision = load_dict('precision_matrix.json')['precision']
+    precision = load_dict(precision_matrix)['precision']
     precision = np.asarray(precision)
 
     array_bqm = dimod.AdjArrayBQM(q, 'BINARY')
